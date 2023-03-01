@@ -17,7 +17,7 @@ pipeline{
     }
     stage("SonarQube"){
       steps{
-        withSonarQubeEnv("arpan-sonar-tokens"){
+        withSonarQubeEnv("test sonar"){
           bat 'mvn clean package sonar:sonar'
         }
       }
