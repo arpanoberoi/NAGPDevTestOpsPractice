@@ -1,19 +1,30 @@
 pipeline{
   agent any
+  tools {
+        maven 'apache-maven-3.8.5' 
+   }
   stages{
-    stage("Code Checkout"){
+    stage("Checkout"){
       steps{
-        echo 'code checkout'
+        sh "mvn --version"
+        checkout scm
       }
     }
-    stage("Code Build"){
+    stage("Build"){
       steps{
-        echo 'code build'
+       sh "mvn install"
       }
     }
     stage("Unit Test"){
       steps{
-        echo 'unit test'
+       sh "mvn test"
+      }
+    }
+    stage("SonarQube"){
+      steps{
+        withSonarQubeEnv("test sonar"){
+          sh "org.sonarsource.scanner.maven:sonar-maven-plugin:jar:3.9.1.2184"
+        }
       }
     }
   }
