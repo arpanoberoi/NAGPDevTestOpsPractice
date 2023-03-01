@@ -39,7 +39,7 @@ pipeline{
             goals: 'clean install',
             deployerId: 'deployer'
         )
-        rtPublisherBuildInfo(
+        rtPublishBuildInfo(
             serverId:'123456789@artifactory'
         )
       }
