@@ -9,9 +9,14 @@ pipeline{
         checkout scm
       }
     }
-    stage("Build & Test"){
+    stage("Build"){
       steps{
-       bat 'mvn clean test'
+       bat 'mvn clean'
+      }
+    }
+    stage("Test"){
+      steps{
+       bat 'mvn test'
       }
     }
     stage("SonarQube"){
