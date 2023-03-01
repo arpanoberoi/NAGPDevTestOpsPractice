@@ -10,20 +10,15 @@ pipeline{
         checkout scm
       }
     }
-    stage("Build"){
+    stage("Build and Test"){
       steps{
-       bat 'mvn install'
-      }
-    }
-    stage("Unit Test"){
-      steps{
-       bat 'mvn test'
+       bat 'mvn clean test'
       }
     }
     stage("SonarQube"){
       steps{
-        withSonarQubeEnv("test sonar"){
-          bat 'sonar-maven-plugin:3.9.1.2184:sonar'
+        withSonarQubeEnv("arpan-sonar-tokens"){
+          bat 'mvn clean package sonar:sonar'
         }
       }
     }
