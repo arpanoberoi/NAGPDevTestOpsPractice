@@ -26,5 +26,23 @@ pipeline{
         }
       }
     }
+    stage("Upload to Artifactory"){
+      steps{
+        rtMavenDeployer(
+            id:'deployer',
+            serverId:'123456789@artifactory',
+            releaseRepo:'arpan.nagptest',
+            snapshotRepo:'arpan.nagptest'
+        )
+        rtMavenRun(
+            pom:'pom.xml',
+            goals: 'clean install',
+            deployerId: 'deployer'
+        )
+        rtPublisherBuildInfo(
+            serverId:'123456789@artifactory'
+        )
+      }
+    }
   }
 }
