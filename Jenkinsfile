@@ -3,17 +3,17 @@ pipeline{
   stages{
     stage("Code Checkout"){
       steps{
-        echo code checkout
+        echo 'code checkout'
       }
     }
     stage("Code Build"){
       steps{
-        echo code build
+        echo 'code build'
       }
     }
     stage("Unit Test"){
       steps{
-        echo unit test
+        echo 'unit test'
       }
     }
   }
