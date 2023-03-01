@@ -6,11 +6,10 @@ pipeline{
   stages{
     stage("Checkout"){
       steps{
-        bat 'mvn --version'
         checkout scm
       }
     }
-    stage("Build and Test"){
+    stage("Build & Test"){
       steps{
        bat 'mvn clean test'
       }
@@ -18,7 +17,7 @@ pipeline{
     stage("SonarQube"){
       steps{
         withSonarQubeEnv("test sonar"){
-          bat 'mvn clean package sonar:sonar'
+          bat 'mvn sonar:sonar'
         }
       }
     }
